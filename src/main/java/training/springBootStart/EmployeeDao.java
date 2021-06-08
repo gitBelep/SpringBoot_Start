@@ -45,5 +45,11 @@ public class EmployeeDao {
                 .getResultList();
     }
 
+    public long countEmployeeNamesWithStartingLetter(String letter) {
+        return entityManager.createQuery(
+                "SELECT COUNT(e.name) FROM Employee e WHERE SUBSTRING(e.name, 1, 1) = :letter", Long.class)
+                .setParameter("letter", letter)
+                .getSingleResult();
+    }
 
 }

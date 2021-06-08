@@ -1,8 +1,6 @@
 package training.springBootStart;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
@@ -55,6 +53,19 @@ class EmployeeDaoTest {
         assertEquals(2, dao.listNamesByPart("B").size());
         assertEquals(1, dao.listNamesByPart("Bu").size());
         assertEquals(0, dao.listNamesByPart("Alx").size());
+    }
+
+    @Test
+    void testCountNamesWithStartLetter() {
+        Employee eA = new Employee("Altamírád");
+        Employee eB = new Employee("Benő");
+        Employee eC = new Employee("Bud");
+        dao.saveEmployee(eA);
+        dao.saveEmployee(eB);
+        dao.saveEmployee(eC);
+
+        assertEquals(2,  dao.countEmployeeNamesWithStartingLetter("B"));
+        assertEquals(0,  dao.countEmployeeNamesWithStartingLetter("Q"));
     }
 
 }
