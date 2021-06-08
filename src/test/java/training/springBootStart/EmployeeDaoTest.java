@@ -26,5 +26,19 @@ class EmployeeDaoTest {
         assertEquals("Alma", dao.listEmployees().get(0).getName());
     }
 
+    @Test
+    void testSumNameLengthByStartLetter() {
+        Employee eA = new Employee("Altamírád");
+        Employee eB = new Employee("Benő");
+        Employee eC = new Employee("Bud");
+        dao.saveEmployee(eA);
+        dao.saveEmployee(eB);
+        dao.saveEmployee(eC);
+
+        List<Integer> ints = dao.listEmployeesNamesLengthWithStartingLetter("B"); //or "b" is the same
+        assertEquals(3,  ints.get(0));        //"Bud"
+        assertEquals(5,  ints.get(1));        //length of "Benő" is 5, because of 'ő'
+        assertEquals(0,  dao.listEmployeesNamesLengthWithStartingLetter("Q").size());  //empty List
+    }
 
 }

@@ -31,5 +31,13 @@ public class EmployeeDao {
                 .getResultList();
     }
 
+    public List<Integer> listEmployeesNamesLengthWithStartingLetter(String letter) {
+        return entityManager.createQuery(
+                "SELECT LENGTH(e.name) FROM Employee e WHERE SUBSTRING(e.name, 1, 1) = :letter ORDER BY e.name DESC", Integer.class)
+                .setParameter("letter", letter)
+                .getResultList();
+    }
+
+
 
 }
