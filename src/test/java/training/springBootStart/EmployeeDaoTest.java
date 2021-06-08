@@ -41,4 +41,20 @@ class EmployeeDaoTest {
         assertEquals(0,  dao.listEmployeesNamesLengthWithStartingLetter("Q").size());  //empty List
     }
 
+    @Test
+    void testFindNameByPart() {
+        Employee eA = new Employee("Altamírád");
+        Employee eB = new Employee("Benő");
+        Employee eC = new Employee("Bud");
+        dao.saveEmployee(eA);
+        dao.saveEmployee(eB);
+        dao.saveEmployee(eC);
+
+        assertEquals("Bud", dao.listNamesByPart("d").get(0));  //Bud, Altamírád
+        assertEquals("Altamírád", dao.listNamesByPart("tamír").get(0));
+        assertEquals(2, dao.listNamesByPart("B").size());
+        assertEquals(1, dao.listNamesByPart("Bu").size());
+        assertEquals(0, dao.listNamesByPart("Alx").size());
+    }
+
 }

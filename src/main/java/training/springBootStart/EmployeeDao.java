@@ -38,6 +38,12 @@ public class EmployeeDao {
                 .getResultList();
     }
 
+    public List<String> listNamesByPart(String part) {
+        return entityManager.createQuery(
+                "SELECT e.name FROM Employee e WHERE LOCATE( :letter, e.name, 1) >= 1 ORDER BY e.name DESC", String.class)
+                .setParameter("letter", part)
+                .getResultList();
+    }
 
 
 }
